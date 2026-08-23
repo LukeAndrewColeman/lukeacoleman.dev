@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const updated = new Date('2026-08-23');
+const updatedLabel = updated.toLocaleDateString('en-GB', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+---
+
+<BaseLayout
+	title="Privacy Policy — Luke Coleman"
+	description="Privacy policy for iOS apps published by Luke Coleman."
+>
+	<article class="py-8 pb-16">
+		<div class="container-page">
+			<header class="mb-8 max-w-2xl border-b border-ink/8 pb-6">
+				<p class="mb-3 text-[0.85rem] font-semibold tracking-[0.06em] text-muted uppercase">Legal</p>
+				<h1 class="mb-3.5 font-display text-[clamp(2rem,4vw,2.75rem)] leading-tight font-bold tracking-tight">
+					Privacy policy
+				</h1>
+				<p class="mb-3 text-muted">
+					This policy applies to iOS apps published by Luke Coleman. Link this page from any App
+					Store listing.
+				</p>
+				<p class="text-[0.9rem] font-semibold text-ink">Last updated: {updatedLabel}</p>
+			</header>
+
+			<div
+				class="prose prose-neutral max-w-2xl prose-headings:font-display prose-headings:tracking-tight prose-a:text-ink prose-strong:text-ink prose-p:text-muted prose-li:text-muted"
+			>
+				<h2>Overview</h2>
+				<p>
+					This Software is provided by <strong>Luke Coleman</strong> (“we”, “us”) and is intended for
+					use as is.
+				</p>
+				<p>
+					This page informs visitors about our policies regarding the collection, use, and disclosure
+					of personal information if anyone decides to use our iOS apps or related Software (“the
+					App” / “our Software”).
+				</p>
+				<p>
+					If you choose to use our Software, you agree to the collection and use of information in
+					relation to this policy. Personal information we collect is used for providing and
+					improving the Software. We will not use or share your information with anyone except as
+					described in this privacy policy.
+				</p>
+
+				<h2>Information collection and use</h2>
+				<p>
+					For a better experience while using our Software, we may require you to provide certain
+					personally identifiable information. Information we request will be retained by us and
+					used as described in this privacy policy.
+				</p>
+				<p>
+					Our apps may use third-party services that collect information used to identify you.
+					Privacy policies of third-party service providers that may be used include:
+				</p>
+				<ul>
+					<li>
+						<a href="https://www.apple.com/legal/privacy/">Apple</a>
+					</li>
+					<li>
+						<a href="https://support.google.com/admob/answer/6128543">AdMob</a>
+					</li>
+					<li>
+						<a href="https://firebase.google.com/support/privacy"
+							>Google Analytics for Firebase</a
+						>
+					</li>
+					<li>
+						<a href="https://firebase.google.com/support/privacy">Firebase Crashlytics</a>
+					</li>
+				</ul>
+				<p>
+					Not every app uses every service listed above. Each app only uses the providers it
+					integrates.
+				</p>
+
+				<h2>Accounts and login</h2>
+				<p>
+					Unless an app specifically offers sign-up or sign-in, we do not collect usernames,
+					passwords, email addresses for accounts, or social login credentials. Where an app does
+					offer accounts, we only collect the information needed to create and operate that account,
+					as described in the app or at the point of collection.
+				</p>
+
+				<h2>In-app purchases</h2>
+				<p>If you choose to buy something inside an app:</p>
+				<ul>
+					<li>
+						Payments are processed by the <strong>Apple App Store</strong>, not by us directly.
+					</li>
+					<li>
+						We do <strong>not</strong> receive your full payment card number, bank details, or
+						billing address from those purchases.
+					</li>
+					<li>
+						Apple may provide us with limited purchase information (for example, that a product was
+						bought or restored) so the app can unlock the paid feature on your device.
+					</li>
+				</ul>
+				<p>
+					Purchase handling, refunds, and payment data are governed by Apple’s terms and privacy
+					policy, in addition to this policy.
+				</p>
+
+				<h2>Log data</h2>
+				<p>
+					Whenever you use our Software, in the case of an error we may collect data and information
+					(through third-party products) on your device called Log Data. This Log Data may include
+					information such as your device Internet Protocol (“IP”) address, device name, operating
+					system version, the configuration of the app when utilizing our Software, the time and date
+					of your use of the Software, and other statistics.
+				</p>
+
+				<h2>Cookies</h2>
+				<p>
+					Cookies are files with a small amount of data that are commonly used as anonymous unique
+					identifiers. These are sent to your browser from the websites that you visit and are stored
+					on your device’s internal memory.
+				</p>
+				<p>
+					Our Software does not use these “cookies” explicitly. However, an app may use third-party
+					code and libraries that use cookies to collect information and improve their services. You
+					may have the option to accept or refuse cookies. If you refuse cookies, you may not be able
+					to use some portions of the Software.
+				</p>
+
+				<h2>Service providers</h2>
+				<p>We may employ third-party companies and individuals to:</p>
+				<ul>
+					<li>Facilitate our Software</li>
+					<li>Provide the Software on our behalf</li>
+					<li>Perform Software-related services</li>
+					<li>Assist us in analyzing how our Software is used</li>
+				</ul>
+				<p>
+					These third parties may have access to your personal information to perform tasks assigned
+					to them on our behalf. They are obligated not to disclose or use the information for any
+					other purpose.
+				</p>
+				<p>
+					We rely on <strong>Apple</strong> (App Store / StoreKit) for iOS distribution and
+					purchases. Apple processes related data under its own privacy policy. We do not sell your
+					personal information.
+				</p>
+
+				<h2>Security</h2>
+				<p>
+					We value your trust in providing us your personal information and strive to use
+					commercially acceptable means of protecting it. No method of transmission over the
+					internet, or method of electronic storage, is 100% secure and reliable, and we cannot
+					guarantee its absolute security.
+				</p>
+
+				<h2>Data stored on your device</h2>
+				<p>
+					Purchase or entitlement status, preferences, and other app data may be stored locally on
+					your device (and/or managed by the App Store) so features work as expected. That
+					information stays on your device and with Apple unless you remove the app or clear related
+					data according to your device settings, or unless a feature below states that data is sent
+					for processing.
+				</p>
+
+				<h2>Cloud or AI processing</h2>
+				<p>
+					When an app offers AI or cloud-powered effects, the selected content may be sent securely
+					to our servers or to trusted third-party AI providers solely to generate the requested
+					result. That content is used only for the processing task. It is not retained afterward for
+					training or shared beyond what is needed to provide the feature. Providers used for a given
+					feature (if any) are disclosed in the app or related materials.
+				</p>
+
+				<h2>Links to other sites</h2>
+				<p>
+					Our Software may contain links to other sites. If you click a third-party link, you will be
+					directed to that site. Those external sites are not operated by us. We strongly advise you
+					to review the privacy policy of those websites. We have no control over and assume no
+					responsibility for the content, privacy policies, or practices of any third-party sites or
+					services.
+				</p>
+
+				<h2>Children’s privacy</h2>
+				<p>
+					Our Software does not address anyone under the age of 13. We do not knowingly collect
+					personally identifiable information from children under 13. If we discover that a child
+					under 13 has provided us with personal information, we will delete it from our servers. If
+					you are a parent or guardian and you are aware that your child has provided us with
+					personal information, please contact us so we can take appropriate action.
+				</p>
+
+				<h2>Changes to this privacy policy</h2>
+				<p>
+					We may update this privacy policy from time to time. You are advised to review this page
+					periodically for any changes. We will notify you of changes by posting the new privacy
+					policy on this page. Continued use of our Software after changes means you accept the
+					updated policy.
+				</p>
+
+				<h2>Contact us</h2>
+				<p>
+					If you have any questions or suggestions about this privacy policy, contact us at
+					<a href="mailto:hello@lukeacoleman.dev">hello@lukeacoleman.dev</a>.
+				</p>
+			</div>
+		</div>
+	</article>
+</BaseLayout>

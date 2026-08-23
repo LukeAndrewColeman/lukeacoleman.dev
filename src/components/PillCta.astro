@@ -1,0 +1,23 @@
+---
+interface Props {
+	href: string;
+	class?: string;
+}
+
+const { href, class: className } = Astro.props;
+---
+
+<a
+	href={href}
+	class:list={[
+		'inline-flex min-h-13 items-center justify-between gap-4 rounded-full border border-transparent bg-lemon px-6 py-1.5 pr-1.5 font-display text-[0.95rem] font-semibold text-ink shadow-(--shadow-soft) transition duration-200 hover:-translate-y-px hover:shadow-[0_16px_44px_rgba(10,10,10,0.1)]',
+		className,
+	]}
+>
+	<span><slot /></span>
+	<span class="grid size-10.5 shrink-0 place-items-center rounded-full bg-ink text-white" aria-hidden="true">
+		<svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+			<path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+		</svg>
+	</span>
+</a>

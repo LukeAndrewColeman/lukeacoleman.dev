@@ -1,0 +1,15 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-16 border-t border-ink/6 py-10 pb-12">
+	<div class="container-page grid items-center gap-4 md:grid-cols-[1fr_auto_1fr]">
+		<p class="font-display font-bold tracking-tight">Luke A Coleman</p>
+		<nav class="flex flex-wrap gap-5 text-[0.95rem] text-muted" aria-label="Footer">
+			<a href="/#services" class="hover:text-ink">Services</a>
+			<a href="/privacy" class="hover:text-ink">Privacy</a>
+			<a href="mailto:hello@lukeacoleman.dev" class="hover:text-ink">Contact</a>
+		</nav>
+		<p class="text-sm text-muted md:justify-self-end md:text-right">&copy; {year} Luke A Coleman</p>
+	</div>
+</footer>

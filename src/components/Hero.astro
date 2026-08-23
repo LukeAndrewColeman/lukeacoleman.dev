@@ -1,0 +1,32 @@
+---
+import PillCta from './PillCta.astro';
+---
+
+<section class="py-8 pb-14 lg:py-10 lg:pb-18">
+	<div
+		class="container-page grid items-center gap-8 lg:min-h-[calc(100svh-7.5rem)] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-12"
+	>
+		<div class="order-first animate-fade-up motion-reduce:animate-none lg:order-none" aria-hidden="true">
+			<div
+				class="grid aspect-4/5 max-h-[34rem] place-items-center overflow-hidden rounded-4xl bg-lemon shadow-(--shadow-soft)"
+			>
+				<div class="font-display text-[clamp(4.5rem,18vw,8rem)] font-bold tracking-tighter text-ink/90">
+					LAC
+				</div>
+			</div>
+		</div>
+
+		<div class="animate-fade-up-delay motion-reduce:animate-none">
+			<p class="mb-3.5 text-[0.9rem] font-semibold tracking-[0.06em] text-muted uppercase">
+				Web &amp; app developer
+			</p>
+			<h1 class="mb-4 max-w-[14ch] font-display text-[clamp(2.35rem,5vw,3.6rem)] leading-tight font-bold tracking-tight">
+				Building clear products for the web and mobile.
+			</h1>
+			<p class="mb-7 max-w-[36ch] text-[1.05rem] text-muted">
+				I design and ship fast websites and apps with careful craft — from first sketch to the App Store.
+			</p>
+			<PillCta href="/#contact">Get in touch</PillCta>
+		</div>
+	</div>
+</section>

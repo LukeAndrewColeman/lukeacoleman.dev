@@ -1,0 +1,31 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+	--color-mint: #e0eee8;
+	--color-lemon: #e7f874;
+	--color-ink: #0a0a0a;
+	--color-muted: #6b7280;
+	--font-display: "Poppins", system-ui, sans-serif;
+	--font-body: "Poppins", system-ui, sans-serif;
+	--shadow-soft: 0 12px 40px rgb(10 10 10 / 0.06);
+	--animate-fade-up: fade-up 0.7s ease both;
+	--animate-fade-up-delay: fade-up 0.7s ease 0.15s both;
+	--animate-fade-up-delay-2: fade-up 0.7s ease 0.3s both;
+}
+
+@keyframes fade-up {
+	from {
+		opacity: 0;
+		transform: translateY(1rem);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@utility container-page {
+	width: min(100% - 2rem, 72rem);
+	margin-inline: auto;
+}
