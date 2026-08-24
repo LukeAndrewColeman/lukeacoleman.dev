@@ -1,22 +1,28 @@
 ---
+const base = import.meta.env.BASE_URL;
 const pathname = Astro.url.pathname;
-const isHome = pathname === '/' || pathname === '';
-const isPrivacy = pathname.startsWith('/privacy');
+const relativePath = pathname.startsWith(base) ? pathname.slice(base.length - 1) : pathname;
+const homeHref = base;
+const servicesHref = `${base}#services`;
+const privacyHref = `${base}privacy`;
+const contactHref = `${base}#contact`;
+const isHome = relativePath === '/' || relativePath === '';
+const isPrivacy = relativePath.startsWith('/privacy');
 ---
 
 <header class="sticky top-0 z-50 border-b border-ink/4 bg-white/85 backdrop-blur-md">
 	<div class="container-page flex min-h-18 items-center justify-between gap-4">
-		<a href="/" class="font-display text-[1.05rem] font-bold tracking-tight" aria-label="Luke Coleman home">
+		<a href={homeHref} class="font-display text-[1.05rem] font-bold tracking-tight" aria-label="Luke Coleman home">
 			Luke A Coleman
 		</a>
 
 		<nav class="hidden items-center gap-7 text-[0.95rem] font-medium text-muted md:flex" aria-label="Primary">
-			<a href="/" class:list={['hover:text-ink', { 'text-ink underline decoration-2 underline-offset-[0.45em]': isHome }]}>
+			<a href={homeHref} class:list={['hover:text-ink', { 'text-ink underline decoration-2 underline-offset-[0.45em]': isHome }]}>
 				Home
 			</a>
-			<a href="/#services" class="hover:text-ink">Services</a>
+			<a href={servicesHref} class="hover:text-ink">Services</a>
 			<a
-				href="/privacy"
+				href={privacyHref}
 				class:list={['hover:text-ink', { 'text-ink underline decoration-2 underline-offset-[0.45em]': isPrivacy }]}
 			>
 				Privacy
@@ -24,7 +30,7 @@ const isPrivacy = pathname.startsWith('/privacy');
 		</nav>
 
 		<a
-			href="/#contact"
+			href={contactHref}
 			class="inline-flex items-center gap-2.5 rounded-full border border-transparent bg-lemon py-1 pr-1 pl-3.5 font-display text-sm font-semibold"
 			aria-label="Get in touch"
 		>

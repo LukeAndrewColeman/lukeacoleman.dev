@@ -7,6 +7,7 @@ const services = [
 	{ title: 'Product UI', icon: 'ui' },
 	{ title: 'Performance', icon: 'perf' },
 ];
+const contactHref = `${import.meta.env.BASE_URL}#contact`;
 ---
 
 <section class="py-4 pb-12" id="services">
@@ -22,7 +23,7 @@ const services = [
 					From marketing sites to App Store releases — focused delivery, clean interfaces, and code you
 					can keep shipping on.
 				</p>
-				<PillCta href="/#contact">Start a project</PillCta>
+				<PillCta href={contactHref}>Start a project</PillCta>
 			</div>
 
 			<ul class="m-0 grid list-none grid-cols-2 gap-3.5 p-0 lg:gap-4">
