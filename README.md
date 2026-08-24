@@ -30,7 +30,7 @@ One shared policy lives at `/privacy` (`src/pages/privacy/index.astro`). Use tha
 
 `public/CNAME` is set to `lukeacoleman.dev`. In your DNS provider, point the domain at GitHub Pages (A/ALIAS or CNAME per [GitHub’s docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)). Enable **Enforce HTTPS** after DNS propagates.
 
-Until the custom domain is active, `astro.config.mjs` is set up for the GitHub Pages project URL (`https://LukeAndrewColeman.github.io/lukeacoleman.dev/`) with `base: '/lukeacoleman.dev'`. Once the custom domain is live, switch `site` back to `https://lukeacoleman.dev` and `base` back to `/`.
+`astro.config.mjs` uses `site: 'https://lukeacoleman.dev'` and `base: '/'` for the custom domain.
 
 ## Vercel (optional)
 
