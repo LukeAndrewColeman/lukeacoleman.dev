@@ -1,7 +1,8 @@
 ---
 import PillCta from './PillCta.astro';
 
-const contactHref = `${import.meta.env.BASE_URL}#contact`;
+const homeHref = new URL('', `https://example.com${import.meta.env.BASE_URL}`).pathname;
+const contactHref = `${homeHref}#contact`;
 ---
 
 <section class="py-8 pb-14 lg:py-10 lg:pb-18">

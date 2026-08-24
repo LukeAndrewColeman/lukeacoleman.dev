@@ -7,7 +7,8 @@ const services = [
 	{ title: 'Product UI', icon: 'ui' },
 	{ title: 'Performance', icon: 'perf' },
 ];
-const contactHref = `${import.meta.env.BASE_URL}#contact`;
+const homeHref = new URL('', `https://example.com${import.meta.env.BASE_URL}`).pathname;
+const contactHref = `${homeHref}#contact`;
 ---
 
 <section class="py-4 pb-12" id="services">
