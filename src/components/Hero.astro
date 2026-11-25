@@ -1,27 +1,41 @@
 ---
+import { Image } from 'astro:assets';
 import PillCta from './PillCta.astro';
+import { apps } from '../data/apps';
 
 const homeHref = new URL('', `https://example.com${import.meta.env.BASE_URL}`).pathname;
 const contactHref = `${homeHref}#contact`;
+const appsHref = `${homeHref}#apps`;
+const liveCount = apps.filter((app) => app.appStoreUrl).length;
+const liveLabel = `${liveCount} ${liveCount === 1 ? 'app' : 'apps'} on the App Store`;
+
+// The code shown in the editor mockup. Each line is a list of [text, colour class] pieces,
+// so the "syntax highlighting" is just spans with different colours.
+const tag = 'text-[#F28FAD]';
+const attr = 'text-lemon';
+const str = 'text-[#A6DDB4]';
+const plain = 'text-white/85';
+const codeLines: [string, string][][] = [
+	[['<', plain], ['section', tag], [' class', attr], ['=', plain], ['"hero"', str], ['>', plain]],
+	[['  <', plain], ['h1', tag], ['>', plain], ['Building intuitive products', plain], ['</', plain], ['h1', tag], ['>', plain]],
+	[['  <', plain], ['PillCta', tag], [' href', attr], ['=', plain], ['"#contact"', str], ['>', plain]],
+	[['    Get in touch', plain]],
+	[['  </', plain], ['PillCta', tag], ['>', plain]],
+	[['</', plain], ['section', tag], ['>', plain]],
+];
 ---
 
-<section class="py-8 pb-14 lg:py-10 lg:pb-18">
+<section class="overflow-x-clip py-8 pb-14 lg:py-10 lg:pb-18">
 	<div
-		class="container-page grid items-center gap-8 lg:min-h-[calc(100svh-7.5rem)] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-12"
+		class="container-page grid items-center gap-10 lg:min-h-[calc(100svh-7.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-12"
 	>
-		<div class="order-first animate-fade-up motion-reduce:animate-none lg:order-none" aria-hidden="true">
-			<div
-				class="grid aspect-4/5 max-h-[34rem] place-items-center overflow-hidden rounded-4xl bg-lemon shadow-(--shadow-soft)"
-			>
-				<div class="font-display text-[clamp(4.5rem,18vw,8rem)] font-bold tracking-tighter text-ink/90">
-					LAC
-				</div>
-			</div>
-		</div>
-
-		<div class="animate-fade-up-delay motion-reduce:animate-none">
-			<p class="mb-3.5 text-[0.9rem] font-semibold tracking-[0.06em] text-muted uppercase">
-				Web &amp; app developer
+		<!-- Text comes first on every screen size, so phones see the headline straight away -->
+		<div class="animate-fade-up motion-reduce:animate-none">
+			<p class="mb-4 inline-flex items-center gap-2.5 rounded-full bg-mint py-1.5 pr-4 pl-1.5 text-[0.95rem] text-muted">
+				<span class="grid size-7 place-items-center rounded-full bg-ink font-display text-[0.7rem] font-bold text-white" aria-hidden="true">LC</span>
+				<span>
+					<strong class="font-semibold text-ink">Luke Coleman</strong><span class="hidden min-[420px]:inline">, a web &amp; app developer</span>
+				</span>
 			</p>
 			<h1 class="mb-4 max-w-[14ch] font-display text-[clamp(2.35rem,5vw,3.6rem)] leading-tight font-bold tracking-tight">
 				Building intuitive products for the web and mobile.
@@ -29,7 +43,93 @@ const contactHref = `${homeHref}#contact`;
 			<p class="mb-7 max-w-[36ch] text-[1.05rem] text-muted">
 				I design and ship fast websites and apps with careful craft — from first sketch to the App Store.
 			</p>
-			<PillCta href={contactHref}>Get in touch</PillCta>
+			<div class="flex flex-wrap items-center gap-x-6 gap-y-4">
+				<PillCta href={contactHref}>Get in touch</PillCta>
+				<a href={appsHref} class="font-display text-[0.95rem] font-semibold underline decoration-2 underline-offset-[0.45em]">
+					See my apps
+				</a>
+			</div>
+
+			<!-- Proof: the real apps, pulled from src/data/apps.ts -->
+			<a href={appsHref} class="group mt-10 inline-flex items-center gap-3.5">
+				<span class="flex -space-x-3">
+					{
+						apps.map((app) => (
+							<Image
+								src={app.icon}
+								alt=""
+								width={44}
+								height={44}
+								densities={[1, 2]}
+								class="size-11 rounded-[22%] ring-3 ring-white transition group-hover:-translate-y-0.5"
+							/>
+						))
+					}
+				</span>
+				<span class="text-[0.9rem] leading-snug text-muted">
+					<strong class="block font-semibold text-ink">{liveLabel}</strong>
+					{apps.length > liveCount ? 'and more on the way' : 'built and shipped by me'}
+				</span>
+			</a>
+		</div>
+
+		<!--
+			Showcase: a code editor and the page it builds, drawn in HTML/CSS (no images).
+			`@container` lets the text inside use `cqw` units (a % of the panel's width),
+			so the whole mockup scales down evenly on small screens.
+			Decorative, so hidden from screen readers.
+		-->
+		<div class="animate-fade-up-delay motion-reduce:animate-none" aria-hidden="true">
+			<div class="@container relative mx-auto aspect-square max-w-136 overflow-hidden rounded-4xl bg-lemon">
+				<!-- Browser window showing a mini version of this site -->
+				<div class="absolute top-[40%] right-[6%] w-[66%] -rotate-2 overflow-hidden rounded-[3cqw] bg-white shadow-[0_20px_50px_rgba(10,10,10,0.16)]">
+					<div class="flex items-center gap-[1.2cqw] border-b border-ink/6 px-[3cqw] py-[2.2cqw]">
+						<span class="size-[1.8cqw] rounded-full bg-ink/15"></span>
+						<span class="size-[1.8cqw] rounded-full bg-ink/15"></span>
+						<span class="size-[1.8cqw] rounded-full bg-ink/15"></span>
+						<span class="ml-[2cqw] rounded-full bg-ink/5 px-[2.5cqw] py-[0.6cqw] font-body text-[2cqw] text-muted">lukeacoleman.dev</span>
+					</div>
+					<div class="p-[4.5cqw]">
+						<div class="mb-[1.6cqw] h-[3.2cqw] w-[80%] rounded-full bg-ink"></div>
+						<div class="mb-[3cqw] h-[3.2cqw] w-[55%] rounded-full bg-ink"></div>
+						<div class="mb-[3.5cqw] h-[1.6cqw] w-[65%] rounded-full bg-ink/15"></div>
+						<div class="mb-[4cqw] flex w-[38%] items-center justify-between rounded-full bg-lemon py-[0.8cqw] pr-[0.8cqw] pl-[3cqw]">
+							<span class="h-[1.4cqw] w-[45%] rounded-full bg-ink/70"></span>
+							<span class="size-[4cqw] rounded-full bg-ink"></span>
+						</div>
+						<div class="grid grid-cols-3 gap-[2cqw] rounded-[2.5cqw] bg-mint p-[2.5cqw]">
+							<span class="h-[7cqw] rounded-[1.6cqw] bg-white"></span>
+							<span class="h-[7cqw] rounded-[1.6cqw] bg-white"></span>
+							<span class="h-[7cqw] rounded-[1.6cqw] bg-white"></span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Code editor -->
+				<div class="absolute top-[8%] left-[6%] w-[70%] rotate-2 overflow-hidden rounded-[3cqw] bg-ink shadow-[0_20px_50px_rgba(10,10,10,0.25)]">
+					<div class="flex items-center gap-[1.2cqw] px-[3cqw] py-[2.2cqw]">
+						<span class="size-[1.8cqw] rounded-full bg-[#FF5F57]"></span>
+						<span class="size-[1.8cqw] rounded-full bg-[#FEBC2E]"></span>
+						<span class="size-[1.8cqw] rounded-full bg-[#28C840]"></span>
+						<span class="ml-[2cqw] font-body text-[2cqw] text-white/50">Hero.astro</span>
+					</div>
+					<pre class="m-0 px-[3.5cqw] pb-[4cqw] font-mono text-[2.5cqw] leading-[1.7]"><code>{
+						codeLines.map((line, index) => (
+							<span class="block whitespace-pre"><span class="mr-[3cqw] inline-block w-[2.5cqw] text-right text-white/25">{index + 1}</span>{line.map(([text, colour]) => <span class={colour}>{text}</span>)}</span>
+						))
+					}</code></pre>
+				</div>
+
+				<!-- Phone, for the "and mobile" part -->
+				<div class="absolute bottom-[6%] left-[7%] w-[22%] rotate-[-5deg] rounded-[4cqw] bg-ink p-[1.2cqw] shadow-[0_20px_50px_rgba(10,10,10,0.25)]">
+					<div class="flex aspect-[9/17] flex-col gap-[1.6cqw] rounded-[3cqw] bg-white p-[2.4cqw] pt-[5cqw]">
+						<span class="h-[2cqw] w-[85%] rounded-full bg-ink"></span>
+						<span class="h-[2cqw] w-[60%] rounded-full bg-ink"></span>
+						<span class="h-[1.2cqw] w-[75%] rounded-full bg-ink/15"></span>
+						<span class="mt-auto h-[4cqw] w-full rounded-full bg-lemon"></span>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
