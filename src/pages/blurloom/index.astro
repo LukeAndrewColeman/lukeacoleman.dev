@@ -1,0 +1,137 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PillCta from '../../components/PillCta.astro';
+import AppStoreBadge from '../../components/AppStoreBadge.astro';
+import { getApp } from '../../data/apps';
+
+// Blurloom isn't released yet, so this has no appStoreUrl and the badge
+// shows "Coming soon". Add the link in src/data/apps.ts at launch.
+const { icon, appStoreUrl } = getApp('blurloom');
+
+const email = 'lukecoleman123@gmail.com';
+const notifyHref = `mailto:${email}?subject=${encodeURIComponent('Tell me when Blurloom launches')}`;
+
+// The hero gradient and the CSS snippet use the same values, which is the
+// whole point of the app: what you see is exactly what you copy.
+const gradient = 'linear-gradient(135deg, #FF8A65, #E8588A, #7B6CF6)';
+
+const features = [
+	{
+		title: 'Blur any photo',
+		body: 'Drag in a photo, slide the blur until it’s calm, and set it as your wallpaper. Your busy holiday snap becomes a soft wash of colour.',
+		bg: 'bg-loom-butter',
+	},
+	{
+		title: 'Make a gradient',
+		body: 'Pick a few colours and an angle with a live preview. No canvas, no layers, no exporting at the right size.',
+		bg: 'bg-loom-peach',
+	},
+	{
+		title: 'Sharp on every screen',
+		body: 'Each wallpaper is rendered at the exact resolution of every connected display, from a MacBook to a 5K monitor.',
+		bg: 'bg-loom-pink',
+	},
+	{
+		title: 'Copy it as code',
+		body: 'Like the gradient? Copy it as CSS or Tailwind and use the same colours in your next build.',
+		bg: 'bg-loom-violet text-white',
+	},
+];
+---
+
+<BaseLayout
+	title="Blurloom — Luke Coleman"
+	description="Blurloom turns any photo or a few colours into a calm Mac wallpaper in seconds, and copies the gradient as CSS. Coming soon to the Mac App Store."
+>
+	<!-- Hero -->
+	<section class="py-8 pb-12 lg:py-12 lg:pb-16">
+		<div class="container-page grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-12">
+			<div class="animate-fade-up motion-reduce:animate-none">
+				<Image
+					src={icon}
+					alt="Blurloom app icon"
+					width={96}
+					height={96}
+					densities={[1, 2]}
+					class="mb-6 size-20 rounded-[22%] shadow-(--shadow-soft) lg:size-24"
+					loading="eager"
+				/>
+				<p class="mb-3.5 flex flex-wrap items-center gap-3 text-[0.9rem] font-semibold tracking-[0.06em] text-muted uppercase">
+					Mac app
+					<span class="rounded-full bg-lemon px-3 py-1 text-[0.75rem] text-ink">Coming soon</span>
+				</p>
+				<h1 class="mb-4 max-w-[16ch] font-display text-[clamp(2.35rem,5vw,3.6rem)] leading-tight font-bold tracking-tight">
+					A calm desktop in about ten seconds.
+				</h1>
+				<p class="mb-7 max-w-[40ch] text-[1.05rem] text-muted">
+					Blurloom turns any photo or a few colours into a calm wallpaper, and hands you the gradient as CSS.
+					No Photoshop required.
+				</p>
+				<div class="flex flex-wrap items-center gap-4">
+					<AppStoreBadge href={appStoreUrl} />
+					<a href={notifyHref} class="font-display text-[0.95rem] font-semibold underline decoration-2 underline-offset-[0.45em] hover:text-loom-violet">
+						Tell me when it launches
+					</a>
+				</div>
+			</div>
+
+			<!-- A real CSS gradient, with the code that makes it underneath -->
+			<figure class="animate-fade-up-delay motion-reduce:animate-none">
+				<div class="aspect-16/10 rounded-4xl shadow-(--shadow-soft)" style={`background: ${gradient}`} aria-hidden="true"></div>
+				<figcaption class="mt-4 overflow-x-auto rounded-2xl bg-ink px-4 py-3 font-mono text-[0.85rem] whitespace-nowrap text-white">
+					<span class="text-white/50">background:</span>
+					{gradient};
+				</figcaption>
+			</figure>
+		</div>
+	</section>
+
+	<!-- Features -->
+	<section class="py-4 pb-12" aria-labelledby="features-heading">
+		<div class="container-page">
+			<h2 id="features-heading" class="mb-6 font-display text-[clamp(1.85rem,3.5vw,2.6rem)] leading-tight font-bold tracking-tight">
+				Busy photo in, calm desktop out.
+			</h2>
+			<ul class="m-0 grid list-none gap-3.5 p-0 sm:grid-cols-2 lg:gap-4">
+				{
+					features.map((feature) => (
+						<li class:list={['rounded-3xl p-6 lg:p-7', feature.bg]}>
+							<h3 class="mb-2 font-display text-[1.15rem] font-semibold tracking-tight">{feature.title}</h3>
+							<p class="opacity-80">{feature.body}</p>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	<!-- Privacy -->
+	<section class="py-4 pb-12" aria-labelledby="privacy-heading">
+		<div class="container-page">
+			<div class="grid gap-6 rounded-4xl bg-loom-paper px-6 py-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-10 lg:p-11">
+				<h2 id="privacy-heading" class="max-w-[14ch] font-display text-[clamp(1.85rem,3.5vw,2.6rem)] leading-tight font-bold tracking-tight">
+					Your photos stay on your Mac.
+				</h2>
+				<ul class="m-0 grid list-none gap-3 p-0 text-ink/80">
+					<li>Everything is processed on your Mac. Nothing is uploaded.</li>
+					<li>No account, no ads and no tracking.</li>
+					<li>Free to download, with a one-off Pro unlock. No subscription.</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<!-- Launch updates -->
+	<section class="py-4" aria-labelledby="notify-heading">
+		<div class="container-page grid gap-6 border-t border-ink/6 py-10 md:grid-cols-[1fr_auto] md:items-end md:gap-8">
+			<div>
+				<h2 id="notify-heading" class="mb-3 font-display text-[clamp(1.85rem,3.5vw,2.5rem)] leading-tight font-bold tracking-tight">
+					Want to know when it’s out?
+				</h2>
+				<p class="max-w-[40ch] text-muted">Send me an email and I’ll let you know the day Blurloom lands on the Mac App Store.</p>
+			</div>
+			<PillCta href={notifyHref}>Tell me when it launches</PillCta>
+		</div>
+	</section>
+</BaseLayout>

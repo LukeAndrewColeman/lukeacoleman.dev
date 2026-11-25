@@ -1,0 +1,241 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PillCta from '../../components/PillCta.astro';
+import ScreenshotGallery from '../../components/ScreenshotGallery.astro';
+import FaqList from '../../components/FaqList.astro';
+import AppStoreBadge from '../../components/AppStoreBadge.astro';
+import { getApp } from '../../data/apps';
+
+import icon from '../../assets/sql-lab/icon.png';
+// The live App Store screenshots (downloaded from the listing at full size).
+// They already include their headline and background, so they're shown as-is.
+import startShot from '../../assets/sql-lab/01.png';
+import buildShot from '../../assets/sql-lab/02.png';
+import conceptShot from '../../assets/sql-lab/03.png';
+import memoryShot from '../../assets/sql-lab/04.png';
+import practiceShot from '../../assets/sql-lab/05.png';
+import starsShot from '../../assets/sql-lab/06.png';
+import streakShot from '../../assets/sql-lab/07.png';
+import masterShot from '../../assets/sql-lab/08.png';
+
+const { appStoreUrl } = getApp('sql-lab');
+
+const supportEmail = 'lukecoleman123@gmail.com';
+const supportHref = `mailto:${supportEmail}?subject=${encodeURIComponent('SQL Lab support')}`;
+const privacyHref = new URL('privacy', `https://example.com${import.meta.env.BASE_URL}`).pathname;
+
+const screenshots = [
+	{ src: startShot, alt: 'Start learning SQL today: the INSERT track on the home screen' },
+	{ src: buildShot, alt: 'Build your first query: tapping tokens to write an ALTER TABLE statement' },
+	{ src: conceptShot, alt: 'Learn one SQL concept at a time: a CREATE TABLE lesson' },
+	{ src: memoryShot, alt: 'Type SQL from memory: a DROP lab exam' },
+	{ src: practiceShot, alt: 'Practice until it clicks: progress, streaks and stars' },
+	{ src: starsShot, alt: 'Earn stars as you improve: a completed lesson with three stars' },
+	{ src: streakShot, alt: 'Keep your streak going: the lesson list for a track' },
+	{ src: masterShot, alt: 'Master SQL from SELECT to DROP: a completed track' },
+];
+
+const tracks = ['SELECT', 'WHERE', 'ORDER BY', 'LIMIT', 'JOIN', 'GROUP BY', 'HAVING', 'INSERT', 'UPDATE', 'DELETE', 'CREATE', 'ALTER', 'DROP'];
+
+const modes = [
+	{ title: 'Study', body: 'Unlimited lives and no clock. Learn each clause at your own pace.' },
+	{ title: 'Practice', body: '45 seconds and 3 lives. Skip the decoys, lock in clause order and chase three stars.' },
+	{ title: 'Type from memory', body: 'Master a lesson, then write the whole query yourself.' },
+	{ title: 'Daily challenge', body: 'Five minutes a day, with a streak to keep you coming back.' },
+];
+
+const plans = [
+	{
+		name: 'Free',
+		price: '£0',
+		items: ['First 8 SELECT lessons', '3 practice runs a day'],
+		highlight: false,
+	},
+	{
+		name: 'SQL Lab Pro',
+		price: '£1.99 once. No subscription',
+		items: ['All 7 tracks', 'Unlimited practice', 'Type from memory'],
+		highlight: true,
+	},
+];
+
+// Support answers. This page is also the app's App Store "Support URL".
+const faqs = [
+	{
+		q: 'How do I restore SQL Lab Pro?',
+		a: 'Open the <strong>Settings</strong> tab, tap <strong>Upgrade to Pro</strong>, then tap <strong>Restore purchases</strong>. Make sure you’re signed in with the same Apple Account you bought it with. Pro is a one-off purchase, so restoring never charges you again.',
+	},
+	{
+		q: 'Will I lose my progress if I change phone?',
+		a: 'Your lessons, stars and streak are saved on your device only, with no account. They come across in an iPhone backup, so keep <strong>iCloud Backup</strong> (Settings → your name → iCloud → iCloud Backup) or a computer backup switched on before you switch phones.',
+	},
+	{
+		q: 'Does SQL Lab work offline?',
+		a: 'Yes. Everything works without a connection. You only need the internet to buy or restore Pro.',
+	},
+	{
+		q: 'Which databases does it teach?',
+		a: 'Standard SQL that carries over to MySQL, PostgreSQL and SQLite.',
+	},
+	{
+		q: 'How do I turn the daily reminder on or off?',
+		a: 'Open the <strong>Settings</strong> tab and toggle <strong>Evening reminder</strong>. Sound and haptics are in the same place.',
+	},
+	{
+		q: 'I think an answer is wrong. What should I do?',
+		a: 'Email me with the track and lesson name (it’s at the top of the screen) and what you expected. I’ll check it and fix it in the next update.',
+	},
+];
+---
+
+<BaseLayout
+	title="Learn SQL: SQL Lab — Luke Coleman"
+	description="SQL Lab turns SQL into bite-sized query puzzles. Build real queries, earn stars and type them from memory. Support, FAQs and contact."
+>
+	<!-- Hero -->
+	<section class="py-8 pb-12 lg:py-12 lg:pb-16">
+		<div class="container-page grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12">
+			<div class="animate-fade-up motion-reduce:animate-none">
+				<Image
+					src={icon}
+					alt="SQL Lab app icon"
+					width={96}
+					height={96}
+					densities={[1, 2]}
+					class="mb-6 size-20 rounded-[22%] shadow-(--shadow-soft) lg:size-24"
+					loading="eager"
+				/>
+				<p class="mb-3.5 text-[0.9rem] font-semibold tracking-[0.06em] text-muted uppercase">iPhone app</p>
+				<h1 class="mb-4 max-w-[16ch] font-display text-[clamp(2.35rem,5vw,3.6rem)] leading-tight font-bold tracking-tight">
+					Learn SQL one query puzzle at a time.
+				</h1>
+				<p class="mb-7 max-w-[40ch] text-[1.05rem] text-muted">
+					Tap tokens to build real queries, race for three stars, then type them from memory. Start free. No
+					account. Works offline.
+				</p>
+				<div class="flex flex-wrap items-center gap-4">
+					<AppStoreBadge href={appStoreUrl} />
+					<a href="#support" class="font-display text-[0.95rem] font-semibold underline decoration-2 underline-offset-[0.45em] hover:text-lab-purple">
+						Get support
+					</a>
+				</div>
+			</div>
+
+			<div class="flex animate-fade-up-delay justify-center motion-reduce:animate-none" aria-hidden="true">
+				<Image
+					src={buildShot}
+					alt=""
+					widths={[320, 640]}
+					sizes="(min-width: 1024px) 320px, 70vw"
+					class="w-[min(70vw,20rem)] rounded-4xl shadow-(--shadow-soft)"
+					loading="eager"
+				/>
+			</div>
+		</div>
+	</section>
+
+	<!-- What you'll learn -->
+	<section class="py-4 pb-12" aria-labelledby="learn-heading">
+		<div class="container-page">
+			<div class="grid gap-6 rounded-4xl bg-lab-purple px-6 py-8 text-white lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-10 lg:p-11">
+				<div>
+					<h2 id="learn-heading" class="mb-3 max-w-[14ch] font-display text-[clamp(1.85rem,3.5vw,2.6rem)] leading-tight font-bold tracking-tight">
+						From SELECT to DROP.
+					</h2>
+					<p class="max-w-[36ch] text-white/75">
+						7 tracks of bite-sized lessons, in standard SQL that carries over to MySQL, PostgreSQL and SQLite.
+					</p>
+				</div>
+				<ul class="m-0 flex list-none flex-wrap content-start gap-2 p-0" aria-label="Topics covered">
+					{
+						tracks.map((keyword) => (
+							<li class="rounded-full bg-lab-yellow px-3.5 py-1.5 font-mono text-[0.9rem] font-semibold text-ink">{keyword}</li>
+						))
+					}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<!-- Modes -->
+	<section class="py-4 pb-12" aria-labelledby="modes-heading">
+		<div class="container-page">
+			<h2 id="modes-heading" class="mb-6 font-display text-[clamp(1.85rem,3.5vw,2.6rem)] leading-tight font-bold tracking-tight">
+				How it works.
+			</h2>
+			<ul class="m-0 grid list-none gap-3.5 p-0 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+				{
+					modes.map((mode) => (
+						<li class="rounded-3xl border border-ink/8 bg-white p-6">
+							<h3 class="mb-2 font-display text-[1.1rem] font-semibold tracking-tight">{mode.title}</h3>
+							<p class="text-muted">{mode.body}</p>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	<!-- Screenshots -->
+	<section class="py-4 pb-12" aria-labelledby="screens-heading">
+		<div class="container-page">
+			<h2 id="screens-heading" class="sr-only">Screenshots</h2>
+			<ScreenshotGallery screenshots={screenshots} desktopColumns={4} />
+		</div>
+	</section>
+
+	<!-- Pricing -->
+	<section class="py-4 pb-12" aria-labelledby="pricing-heading">
+		<div class="container-page">
+			<h2 id="pricing-heading" class="mb-2 font-display text-[clamp(1.85rem,3.5vw,2.6rem)] leading-tight font-bold tracking-tight">
+				Free and Pro.
+			</h2>
+			<p class="mb-6 max-w-[52ch] text-muted">
+				No monthly subscription. Pro is one purchase, yours forever. UK price shown; the App Store shows your
+				local price.
+			</p>
+			<div class="grid gap-3.5 md:grid-cols-2 lg:gap-4">
+				{
+					plans.map((plan) => (
+						<div class:list={['rounded-3xl p-6 lg:p-7', plan.highlight ? 'bg-lemon' : 'border border-ink/8 bg-white']}>
+							<h3 class="font-display text-[1.15rem] font-semibold tracking-tight">{plan.name}</h3>
+							<p class="mb-4 text-[0.95rem] text-ink/70">{plan.price}</p>
+							<ul class="m-0 grid list-none gap-2 p-0">
+								{plan.items.map((item) => (
+									<li class="flex gap-2.5">
+										<svg class="mt-1.5 size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+											<path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+										<span>{item}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+					))
+				}
+			</div>
+			<p class="mt-5 text-[0.95rem] text-muted">
+				No account, no ads and no tracking. Read the <a href={privacyHref} class="font-semibold text-ink underline underline-offset-4">privacy policy</a>.
+			</p>
+		</div>
+	</section>
+
+	<!-- Support (target for the App Store "Support URL") -->
+	<section id="support" class="scroll-mt-24 py-4" aria-labelledby="support-heading">
+		<div class="container-page grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-12">
+			<div>
+				<h2 id="support-heading" class="mb-3 font-display text-[clamp(1.85rem,3.5vw,2.6rem)] leading-tight font-bold tracking-tight">
+					Support.
+				</h2>
+				<p class="mb-6 max-w-[36ch] text-muted">
+					Stuck, found a bug or have an idea? Email me and I’ll get back to you as soon as I can.
+				</p>
+				<PillCta href={supportHref}>Email support</PillCta>
+				<p class="mt-4 text-[0.9rem] text-muted">{supportEmail}</p>
+			</div>
+
+			<FaqList faqs={faqs} />
+		</div>
+	</section>
+</BaseLayout>

@@ -1,4 +1,6 @@
 ---
+import { apps } from '../data/apps';
+
 const year = new Date().getFullYear();
 const base = import.meta.env.BASE_URL;
 const joinBase = (path = '') => new URL(path, `https://example.com${base}`).pathname;
@@ -9,6 +11,7 @@ const joinBase = (path = '') => new URL(path, `https://example.com${base}`).path
 		<p class="font-display font-bold tracking-tight">Luke A Coleman</p>
 		<nav class="flex flex-wrap gap-5 text-[0.95rem] text-muted" aria-label="Footer">
 			<a href={`${joinBase()}#services`} class="hover:text-ink">Services</a>
+			{apps.map((app) => <a href={joinBase(app.slug)} class="hover:text-ink">{app.name}</a>)}
 			<a href={joinBase('privacy')} class="hover:text-ink">Privacy</a>
 			<a href="mailto:lukecoleman123@gmail.com" class="hover:text-ink">Contact</a>
 		</nav>

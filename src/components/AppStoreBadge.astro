@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+// Apple's official badge, unmodified, from
+// https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg
+// Apple's marketing guidelines say to use this artwork as-is rather than
+// drawing your own button with the Apple logo.
+import badge from '../assets/app-store-badge.svg';
+
+interface Props {
+	/** The App Store link. Without one, a "Coming soon" label shows instead. */
+	href?: string;
+	/** Names the app for screen readers when several badges share a page. */
+	appName?: string;
+	/** Apple asks for at least 40px tall on screen; `sm` is 44px, `md` 52px. */
+	size?: 'sm' | 'md';
+}
+
+const { href, appName, size = 'md' } = Astro.props;
+const alt = appName ? `Download ${appName} on the App Store` : 'Download on the App Store';
+const heightClass = size === 'sm' ? 'h-11' : 'h-13';
+---
+
+{
+	href ? (
+		<a
+			href={href}
+			class="inline-block rounded-[0.6rem] transition duration-200 hover:-translate-y-px hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+		>
+			<Image src={badge} alt={alt} class:list={['w-auto', heightClass]} />
+		</a>
+	) : (
+		// Not a link and not Apple's artwork: the badge is only for apps you can actually download.
+		<span
+			class:list={[
+				'inline-flex items-center rounded-[0.6rem] border-2 border-dashed border-ink/25 px-4 font-display text-[0.9rem] font-semibold text-ink/70',
+				heightClass,
+			]}
+		>
+			Coming soon to the App Store
+		</span>
+	)
+}

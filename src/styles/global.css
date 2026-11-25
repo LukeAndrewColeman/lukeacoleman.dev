@@ -6,6 +6,24 @@
 	--color-lemon: #e7f874;
 	--color-ink: #0a0a0a;
 	--color-muted: #6b7280;
+
+	/* SnapPea app palette (matches SnapPea/Theme/Theme.swift) */
+	--color-pea-green: #347a55;
+	--color-pea-lilac: #c4b1f5;
+	--color-pea-apricot: #f6b65a;
+	--color-pea-periwinkle: #9daaf6;
+	--color-pea-mint: #a6ddb4;
+
+	/* SQL Lab app palette (matches sql-lab/src/theme) */
+	--color-lab-purple: #5c2d91;
+	--color-lab-yellow: #f5c518;
+
+	/* Blurloom app palette (matches Blurloom/docs/design.md) */
+	--color-loom-butter: #f6c744;
+	--color-loom-violet: #7b6cf6;
+	--color-loom-pink: #e8588a;
+	--color-loom-peach: #ff8a65;
+	--color-loom-paper: #fbf9f4;
 	--font-display: "Poppins", system-ui, sans-serif;
 	--font-body: "Poppins", system-ui, sans-serif;
 	--shadow-soft: 0 12px 40px rgb(10 10 10 / 0.06);

@@ -1,0 +1,33 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+	screenshots: { src: ImageMetadata; alt: string }[];
+	/** How many screenshots sit side by side on large screens. */
+	desktopColumns?: 4 | 5;
+}
+
+const { screenshots, desktopColumns = 5 } = Astro.props;
+
+// Tailwind only generates classes it can find written out in full,
+// so map the prop to complete class names rather than building them.
+const columnClass = { 4: 'lg:grid-cols-4', 5: 'lg:grid-cols-5' }[desktopColumns];
+const sizes = desktopColumns === 4 ? '(min-width: 1024px) 17rem, 62vw' : '(min-width: 1024px) 13rem, 62vw';
+---
+
+<!-- Scrolls sideways on small screens, becomes a grid on large ones -->
+<ul
+	class:list={[
+		'-mx-4 m-0 flex list-none snap-x snap-mandatory gap-3.5 overflow-x-auto px-4 pb-2 lg:mx-0 lg:grid lg:overflow-visible lg:px-0',
+		columnClass,
+	]}
+>
+	{
+		screenshots.map((shot) => (
+			<li class="w-[62vw] max-w-64 shrink-0 snap-start lg:w-auto lg:max-w-none">
+				<Image src={shot.src} alt={shot.alt} widths={[280, 560]} sizes={sizes} class="w-full rounded-3xl" />
+			</li>
+		))
+	}
+</ul>

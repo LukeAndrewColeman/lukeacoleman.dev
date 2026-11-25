@@ -1,0 +1,251 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PillCta from '../../components/PillCta.astro';
+import ScreenshotGallery from '../../components/ScreenshotGallery.astro';
+import FaqList from '../../components/FaqList.astro';
+import AppStoreBadge from '../../components/AppStoreBadge.astro';
+import { getApp } from '../../data/apps';
+
+import icon from '../../assets/snappea/icon.png';
+// The App Store screenshots from the SnapPea repo (docs/store/screenshots).
+// They already include their headline and background, so they're shown as-is.
+import snapShot from '../../assets/snappea/01-snap.png';
+import libraryShot from '../../assets/snappea/02-library.png';
+import recipeShot from '../../assets/snappea/03-recipe.png';
+import planShot from '../../assets/snappea/04-plan.png';
+import listShot from '../../assets/snappea/05-list.png';
+
+const { appStoreUrl } = getApp('snappea');
+
+const supportEmail = 'lukecoleman123@gmail.com';
+const supportHref = `mailto:${supportEmail}?subject=${encodeURIComponent('SnapPea support')}`;
+const privacyHref = new URL('privacy', `https://example.com${import.meta.env.BASE_URL}`).pathname;
+
+const screenshots = [
+	{ src: snapShot, alt: 'Snap any recipe in seconds: the Scan tab with a “Scan a page” button' },
+	{ src: libraryShot, alt: 'Every favourite in one place: the recipe library with search' },
+	{ src: recipeShot, alt: 'Cook from a tidy recipe: timings, ingredients and method' },
+	{ src: planShot, alt: 'Know what’s for dinner: the weekly meal plan' },
+	{ src: listShot, alt: 'Your list writes itself: a shopping list built from planned meals' },
+];
+
+const features = [
+	{
+		title: 'Snap any recipe',
+		body: 'Point your camera at a cookbook page, or pick a photo. SnapPea reads the title, ingredients, method, servings and timings, ready for you to check and save.',
+		bg: 'bg-pea-mint',
+	},
+	{
+		title: 'Every favourite in one place',
+		body: 'No more flicking through books and screenshots. Search your library by title or ingredient and tweak each recipe until it’s how you make it.',
+		bg: 'bg-pea-lilac',
+	},
+	{
+		title: 'Know what’s for dinner',
+		body: 'Drop saved recipes into breakfast, lunch and dinner for each day of the week. Less deciding at 6pm.',
+		bg: 'bg-pea-apricot',
+	},
+	{
+		title: 'Your list writes itself',
+		body: 'Pick the meals you’re shopping for and their ingredients land on one list, with matching items added up. Tick things off as you go.',
+		bg: 'bg-pea-periwinkle',
+	},
+];
+
+const plans = [
+	{
+		name: 'Free',
+		price: '£0',
+		items: ['3 recipe scans a month', 'Up to 10 saved recipes', 'Plan the current week', 'Up to 3 meals on your shopping list'],
+		highlight: false,
+	},
+	{
+		name: 'SnapPea Pro',
+		price: '£2.99 a month or £24.99 a year',
+		items: ['Unlimited recipe scans', 'Unlimited recipe library', 'Plan any week ahead', 'Unlimited shopping list meals'],
+		highlight: true,
+	},
+];
+
+// Support answers. Apple requires a support page, and these cover the
+// questions people are most likely to ask.
+const faqs = [
+	{
+		q: 'How do I restore my SnapPea Pro subscription?',
+		a: 'Open SnapPea, tap <strong>Go Pro</strong> on the Scan tab, then tap <strong>Restore purchases</strong> at the bottom of the screen. Make sure you’re signed in with the same Apple Account you subscribed with.',
+	},
+	{
+		q: 'How do I cancel or change my subscription?',
+		a: 'Pro subscribers can tap <strong>Manage</strong> on the Scan tab. You can also go to <strong>Settings → your name → Subscriptions</strong> on your iPhone or iPad. Cancel at least 24 hours before the end of the current period to avoid being charged again.',
+	},
+	{
+		q: 'How do I keep my recipes safe?',
+		a: 'Your recipes, plans and lists are saved on your device only. SnapPea doesn’t sync, so it can’t restore them for you. They’re included in your iPhone or iPad backup, so keep <strong>iCloud Backup</strong> (Settings → your name → iCloud → iCloud Backup) or a computer backup switched on.',
+	},
+	{
+		q: 'Are my photos uploaded anywhere?',
+		a: 'No. Pages are read on your device with Apple Intelligence. On devices without it, SnapPea asks first, and only if you allow it is the <em>text</em> read from the page (never the photo) sent to Google Gemini. You can change this any time in <strong>Privacy</strong> on the Scan tab.',
+	},
+	{
+		q: 'Do I need an account?',
+		a: 'No. There’s no sign-up, no ads and no tracking.',
+	},
+	{
+		q: 'A scan came out wrong. What can I do?',
+		a: 'You can edit anything before saving. Flat, well-lit pages with the whole recipe in frame give the best results. If a page keeps reading badly, email me a photo of it and I’ll take a look.',
+	},
+];
+---
+
+<BaseLayout
+	title="SnapPea: Recipe Scanner — Luke Coleman"
+	description="SnapPea turns cookbook pages into recipes, then plans your week and writes your shopping list. Support, FAQs and contact."
+>
+	<!-- Hero -->
+	<section class="py-8 pb-12 lg:py-12 lg:pb-16">
+		<div class="container-page grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12">
+			<div class="animate-fade-up motion-reduce:animate-none">
+				<Image
+					src={icon}
+					alt="SnapPea app icon"
+					width={96}
+					height={96}
+					densities={[1, 2]}
+					class="mb-6 size-20 rounded-[22%] shadow-(--shadow-soft) lg:size-24"
+					loading="eager"
+				/>
+				<p class="mb-3.5 text-[0.9rem] font-semibold tracking-[0.06em] text-muted uppercase">
+					iPhone &amp; iPad app
+				</p>
+				<h1 class="mb-4 max-w-[16ch] font-display text-[clamp(2.35rem,5vw,3.6rem)] leading-tight font-bold tracking-tight">
+					Turn your cookbooks into a weekly meal plan.
+				</h1>
+				<p class="mb-7 max-w-[40ch] text-[1.05rem] text-muted">
+					Snap a page, plan dinner and let your shopping list write itself. Your recipes stay on your
+					device.
+				</p>
+				<div class="flex flex-wrap items-center gap-4">
+					<AppStoreBadge href={appStoreUrl} />
+					<a href="#support" class="font-display text-[0.95rem] font-semibold underline decoration-2 underline-offset-[0.45em] hover:text-pea-green">
+						Get support
+					</a>
+				</div>
+			</div>
+
+			<div class="flex animate-fade-up-delay justify-center motion-reduce:animate-none" aria-hidden="true">
+				<Image
+					src={snapShot}
+					alt=""
+					widths={[320, 640]}
+					sizes="(min-width: 1024px) 320px, 70vw"
+					class="w-[min(70vw,20rem)] rounded-4xl shadow-(--shadow-soft)"
+					loading="eager"
+				/>
+			</div>
+		</div>
+	</section>
+
+	<!-- Features -->
+	<section class="py-4 pb-12" aria-labelledby="features-heading">
+		<div class="container-page">
+			<h2 id="features-heading" class="mb-6 font-display text-[clamp(1.85rem,3.5vw,2.6rem)] leading-tight font-bold tracking-tight">
+				From page to plate.
+			</h2>
+			<ul class="m-0 grid list-none gap-3.5 p-0 sm:grid-cols-2 lg:gap-4">
+				{
+					features.map((feature) => (
+						<li class:list={['rounded-3xl p-6 lg:p-7', feature.bg]}>
+							<h3 class="mb-2 font-display text-[1.15rem] font-semibold tracking-tight">{feature.title}</h3>
+							<p class="text-ink/75">{feature.body}</p>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	<!-- Screenshots: scrolls sideways on small screens, five across on large ones -->
+	<section class="py-4 pb-12" aria-labelledby="screens-heading">
+		<div class="container-page">
+			<h2 id="screens-heading" class="sr-only">Screenshots</h2>
+			<ScreenshotGallery screenshots={screenshots} />
+
+		</div>
+	</section>
+
+	<!-- Privacy -->
+	<section class="py-4 pb-12" aria-labelledby="privacy-heading">
+		<div class="container-page">
+			<div class="grid gap-6 rounded-4xl bg-mint px-6 py-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-10 lg:p-11">
+				<h2 id="privacy-heading" class="max-w-[14ch] font-display text-[clamp(1.85rem,3.5vw,2.6rem)] leading-tight font-bold tracking-tight">
+					Private by design.
+				</h2>
+				<ul class="m-0 grid list-none gap-3 p-0 text-ink/80">
+					<li>Pages are read on your device with Apple Intelligence. Your photos are never uploaded.</li>
+					<li>No account, no ads and no tracking.</li>
+					<li>Your recipes, plans and lists live on your device only.</li>
+					<li>
+						Read the full <a href={privacyHref} class="font-semibold text-ink underline underline-offset-4">privacy policy</a>.
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<!-- Pricing -->
+	<section class="py-4 pb-12" aria-labelledby="pricing-heading">
+		<div class="container-page">
+			<h2 id="pricing-heading" class="mb-2 font-display text-[clamp(1.85rem,3.5vw,2.6rem)] leading-tight font-bold tracking-tight">
+				Free and Pro.
+			</h2>
+			<p class="mb-6 max-w-[52ch] text-muted">
+				SnapPea is free to download. The annual Pro plan starts with a one-week free trial for eligible
+				new subscribers. UK prices shown; the App Store shows your local price.
+			</p>
+			<div class="grid gap-3.5 md:grid-cols-2 lg:gap-4">
+				{
+					plans.map((plan) => (
+						<div
+							class:list={[
+								'rounded-3xl p-6 lg:p-7',
+								plan.highlight ? 'bg-lemon' : 'border border-ink/8 bg-white',
+							]}
+						>
+							<h3 class="font-display text-[1.15rem] font-semibold tracking-tight">{plan.name}</h3>
+							<p class="mb-4 text-[0.95rem] text-ink/70">{plan.price}</p>
+							<ul class="m-0 grid list-none gap-2 p-0">
+								{plan.items.map((item) => (
+									<li class="flex gap-2.5">
+										<svg class="mt-1.5 size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+											<path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+										<span>{item}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- Support (this section is the App Store "Support URL" target) -->
+	<section id="support" class="scroll-mt-24 py-4" aria-labelledby="support-heading">
+		<div class="container-page grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-12">
+			<div>
+				<h2 id="support-heading" class="mb-3 font-display text-[clamp(1.85rem,3.5vw,2.6rem)] leading-tight font-bold tracking-tight">
+					Support.
+				</h2>
+				<p class="mb-6 max-w-[36ch] text-muted">
+					Stuck, found a bug or have an idea? Email me and I’ll get back to you as soon as I can.
+				</p>
+				<PillCta href={supportHref}>Email support</PillCta>
+				<p class="mt-4 text-[0.9rem] text-muted">{supportEmail}</p>
+			</div>
+
+			<FaqList faqs={faqs} />
+		</div>
+	</section>
+</BaseLayout>
