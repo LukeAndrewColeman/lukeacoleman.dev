@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PillCta from '../../components/PillCta.astro';
+import FaqList from '../../components/FaqList.astro';
 import AppStoreBadge from '../../components/AppStoreBadge.astro';
 import { getApp } from '../../data/apps';
 
@@ -9,26 +10,10 @@ import { getApp } from '../../data/apps';
 // shows "Coming soon". Add the link in src/data/apps.ts at launch.
 const { icon, appStoreUrl } = getApp('blurloom');
 
-const email = 'lukecoleman123@gmail.com';
-const notifyHref = `mailto:${email}?subject=${encodeURIComponent('Tell me when Blurloom launches')}`;
-const supportHref = `mailto:${email}?subject=${encodeURIComponent('Blurloom support')}`;
-
-// Answers to the questions App Review and customers are most likely to ask.
-// The App Store's Support URL points at #support.
-const faqs = [
-	{
-		question: 'How do I restore Blurloom Pro?',
-		answer: 'Open the Blurloom menu and choose Restore Purchases, or click Restore Purchases in the Pro unlock sheet. Make sure you’re signed in to the Mac App Store with the Apple Account you bought it with.',
-	},
-	{
-		question: 'Why did my wallpaper only change on one Space?',
-		answer: 'macOS only lets apps set the wallpaper for the Space you’re on. To use it on every Space with Pro, choose Save Image…, then pick the saved image in System Settings → Wallpaper and turn on “Show on all Spaces”. On the free version, switch to each Space and click Set as Wallpaper again.',
-	},
-	{
-		question: 'What’s free and what’s in Pro?',
-		answer: 'Free: blur a photo or make a 2-colour gradient, set it as your wallpaper, and copy the gradient as CSS or Tailwind. Pro, a one-off purchase: effects (colour blend, hue, saturation, vignette and grain), gradients with 3–5 colours, Dim in Dark Mode, Save Image… and Saved Gradients.',
-	},
-];
+const supportEmail = 'lukecoleman123@gmail.com';
+const supportHref = `mailto:${supportEmail}?subject=${encodeURIComponent('Blurloom support')}`;
+const notifyHref = `mailto:${supportEmail}?subject=${encodeURIComponent('Tell me when Blurloom launches')}`;
+const privacyHref = new URL('privacy', `https://example.com${import.meta.env.BASE_URL}`).pathname;
 
 // The hero gradient and the CSS snippet use the same values, which is the
 // whole point of the app: what you see is exactly what you copy.
@@ -56,11 +41,54 @@ const features = [
 		bg: 'bg-loom-violet text-white',
 	},
 ];
+
+const plans = [
+	{
+		name: 'Free',
+		price: '£0',
+		items: ['Blur any photo into a wallpaper', '2-colour gradients and Surprise Me', 'Set as Wallpaper on every display', 'Copy gradients as CSS or Tailwind'],
+		highlight: false,
+	},
+	{
+		name: 'Blurloom Pro',
+		price: '£2.99 once. No subscription',
+		items: ['Effects: colour blend, hue, saturation, vignette and grain', 'Gradients with 3–5 colours', 'Dim in Dark Mode', 'Save Image and Saved Gradients'],
+		highlight: true,
+	},
+];
+
+// Support answers. This page is also the app's App Store "Support URL".
+const faqs = [
+	{
+		q: 'How do I restore Blurloom Pro?',
+		a: 'Open the <strong>Blurloom</strong> menu and choose <strong>Restore Purchases</strong>, or click <strong>Restore Purchases</strong> in the Pro unlock sheet. Make sure you’re signed in to the Mac App Store with the Apple Account you bought it with. Pro is a one-off purchase, so restoring never charges you again.',
+	},
+	{
+		q: 'Why did my wallpaper only change on one Space?',
+		a: 'macOS only lets apps set the wallpaper for the Space you’re on. With Pro, choose <strong>Save Image…</strong>, then pick the saved image in <strong>System Settings → Wallpaper</strong> and turn on <strong>Show on all Spaces</strong>. On the free version, switch to each Space and click <strong>Set as Wallpaper</strong> again.',
+	},
+	{
+		q: 'Can I try Pro features before buying?',
+		a: 'Yes. Effects and extra colours work in the live preview for free. You’ll only be asked to unlock Pro when you set a wallpaper that uses them.',
+	},
+	{
+		q: 'Are my photos uploaded anywhere?',
+		a: 'No. Everything happens on your Mac. Blurloom doesn’t connect to the internet itself, and your photos never leave your Mac.',
+	},
+	{
+		q: 'Do I need an account?',
+		a: 'No. There’s no sign-up, no ads and no tracking.',
+	},
+	{
+		q: 'How do I copy a gradient as code?',
+		a: 'On the <strong>Gradient</strong> tab, click <strong>Copy CSS</strong> or <strong>Copy Tailwind</strong>. The code matches the preview exactly, so you can paste it straight into your project.',
+	},
+];
 ---
 
 <BaseLayout
 	title="Blurloom — Luke Coleman"
-	description="Blurloom turns any photo or a few colours into a calm Mac wallpaper in seconds, and copies the gradient as CSS. Coming soon to the Mac App Store."
+	description="Blurloom turns any photo or a few colours into a calm Mac wallpaper in seconds, and copies the gradient as CSS. Coming soon to the Mac App Store. Support, FAQs and contact."
 >
 	<!-- Hero -->
 	<section class="py-8 pb-12 lg:py-12 lg:pb-16">
@@ -134,47 +162,62 @@ const features = [
 				<ul class="m-0 grid list-none gap-3 p-0 text-ink/80">
 					<li>Everything is processed on your Mac. Nothing is uploaded.</li>
 					<li>No account, no ads and no tracking.</li>
-					<li>Free to download, with a one-off Pro unlock. No subscription.</li>
+					<li>
+						Read the full <a href={privacyHref} class="font-semibold text-ink underline underline-offset-4">privacy policy</a>.
+					</li>
 				</ul>
 			</div>
 		</div>
 	</section>
 
-	<!-- Help & support (the App Store Support URL links here) -->
-	<section id="support" class="scroll-mt-24 py-4 pb-12" aria-labelledby="support-heading">
+	<!-- Pricing -->
+	<section class="py-4 pb-12" aria-labelledby="pricing-heading">
 		<div class="container-page">
-			<h2 id="support-heading" class="mb-6 font-display text-[clamp(1.85rem,3.5vw,2.6rem)] leading-tight font-bold tracking-tight">
-				Help &amp; support
+			<h2 id="pricing-heading" class="mb-2 font-display text-[clamp(1.85rem,3.5vw,2.6rem)] leading-tight font-bold tracking-tight">
+				Free and Pro.
 			</h2>
-			<dl class="m-0 grid max-w-3xl gap-6">
+			<p class="mb-6 max-w-[52ch] text-muted">
+				Blurloom is free to download. Pro is one purchase, yours forever. UK price shown; the App Store shows your
+				local price.
+			</p>
+			<div class="grid gap-3.5 md:grid-cols-2 lg:gap-4">
 				{
-					faqs.map((faq) => (
-						<div>
-							<dt class="mb-1.5 font-display text-[1.15rem] font-semibold tracking-tight">{faq.question}</dt>
-							<dd class="m-0 text-muted">{faq.answer}</dd>
+					plans.map((plan) => (
+						<div class:list={['rounded-3xl p-6 lg:p-7', plan.highlight ? 'bg-lemon' : 'border border-ink/8 bg-white']}>
+							<h3 class="font-display text-[1.15rem] font-semibold tracking-tight">{plan.name}</h3>
+							<p class="mb-4 text-[0.95rem] text-ink/70">{plan.price}</p>
+							<ul class="m-0 grid list-none gap-2 p-0">
+								{plan.items.map((item) => (
+									<li class="flex gap-2.5">
+										<svg class="mt-1.5 size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+											<path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+										<span>{item}</span>
+									</li>
+								))}
+							</ul>
 						</div>
 					))
 				}
-			</dl>
-			<p class="mt-8 max-w-3xl text-muted">
-				Something else? Email
-				<a href={supportHref} class="font-semibold text-ink underline decoration-2 underline-offset-[0.3em] hover:text-loom-violet">{email}</a>
-				and I’ll get back to you. You can also read the
-				<a href="/privacy/#blurloom" class="font-semibold text-ink underline decoration-2 underline-offset-[0.3em] hover:text-loom-violet">privacy policy</a>.
-			</p>
+			</div>
 		</div>
 	</section>
 
-	<!-- Launch updates -->
-	<section class="py-4" aria-labelledby="notify-heading">
-		<div class="container-page grid gap-6 border-t border-ink/6 py-10 md:grid-cols-[1fr_auto] md:items-end md:gap-8">
+	<!-- Support (target for the App Store "Support URL") -->
+	<section id="support" class="scroll-mt-24 py-4" aria-labelledby="support-heading">
+		<div class="container-page grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-12">
 			<div>
-				<h2 id="notify-heading" class="mb-3 font-display text-[clamp(1.85rem,3.5vw,2.5rem)] leading-tight font-bold tracking-tight">
-					Want to know when it’s out?
+				<h2 id="support-heading" class="mb-3 font-display text-[clamp(1.85rem,3.5vw,2.6rem)] leading-tight font-bold tracking-tight">
+					Support.
 				</h2>
-				<p class="max-w-[40ch] text-muted">Send me an email and I’ll let you know the day Blurloom lands on the Mac App Store.</p>
+				<p class="mb-6 max-w-[36ch] text-muted">
+					Stuck, found a bug or have an idea? Email me and I’ll get back to you as soon as I can.
+				</p>
+				<PillCta href={supportHref}>Email support</PillCta>
+				<p class="mt-4 text-[0.9rem] text-muted">{supportEmail}</p>
 			</div>
-			<PillCta href={notifyHref}>Tell me when it launches</PillCta>
+
+			<FaqList faqs={faqs} />
 		</div>
 	</section>
 </BaseLayout>
