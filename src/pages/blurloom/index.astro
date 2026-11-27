@@ -11,6 +11,24 @@ const { icon, appStoreUrl } = getApp('blurloom');
 
 const email = 'lukecoleman123@gmail.com';
 const notifyHref = `mailto:${email}?subject=${encodeURIComponent('Tell me when Blurloom launches')}`;
+const supportHref = `mailto:${email}?subject=${encodeURIComponent('Blurloom support')}`;
+
+// Answers to the questions App Review and customers are most likely to ask.
+// The App Store's Support URL points at #support.
+const faqs = [
+	{
+		question: 'How do I restore Blurloom Pro?',
+		answer: 'Open the Blurloom menu and choose Restore Purchases, or click Restore Purchases in the Pro unlock sheet. Make sure you’re signed in to the Mac App Store with the Apple Account you bought it with.',
+	},
+	{
+		question: 'Why did my wallpaper only change on one Space?',
+		answer: 'macOS only lets apps set the wallpaper for the Space you’re on. To use it on every Space with Pro, choose Save Image…, then pick the saved image in System Settings → Wallpaper and turn on “Show on all Spaces”. On the free version, switch to each Space and click Set as Wallpaper again.',
+	},
+	{
+		question: 'What’s free and what’s in Pro?',
+		answer: 'Free: blur a photo or make a 2-colour gradient, set it as your wallpaper, and copy the gradient as CSS or Tailwind. Pro, a one-off purchase: effects (colour blend, hue, saturation, vignette and grain), gradients with 3–5 colours, Dim in Dark Mode, Save Image… and Saved Gradients.',
+	},
+];
 
 // The hero gradient and the CSS snippet use the same values, which is the
 // whole point of the app: what you see is exactly what you copy.
@@ -119,6 +137,31 @@ const features = [
 					<li>Free to download, with a one-off Pro unlock. No subscription.</li>
 				</ul>
 			</div>
+		</div>
+	</section>
+
+	<!-- Help & support (the App Store Support URL links here) -->
+	<section id="support" class="scroll-mt-24 py-4 pb-12" aria-labelledby="support-heading">
+		<div class="container-page">
+			<h2 id="support-heading" class="mb-6 font-display text-[clamp(1.85rem,3.5vw,2.6rem)] leading-tight font-bold tracking-tight">
+				Help &amp; support
+			</h2>
+			<dl class="m-0 grid max-w-3xl gap-6">
+				{
+					faqs.map((faq) => (
+						<div>
+							<dt class="mb-1.5 font-display text-[1.15rem] font-semibold tracking-tight">{faq.question}</dt>
+							<dd class="m-0 text-muted">{faq.answer}</dd>
+						</div>
+					))
+				}
+			</dl>
+			<p class="mt-8 max-w-3xl text-muted">
+				Something else? Email
+				<a href={supportHref} class="font-semibold text-ink underline decoration-2 underline-offset-[0.3em] hover:text-loom-violet">{email}</a>
+				and I’ll get back to you. You can also read the
+				<a href="/privacy/#blurloom" class="font-semibold text-ink underline decoration-2 underline-offset-[0.3em] hover:text-loom-violet">privacy policy</a>.
+			</p>
 		</div>
 	</section>
 

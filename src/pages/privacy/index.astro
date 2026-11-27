@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const updated = new Date('2026-08-23');
+const updated = new Date('2026-11-27');
 const updatedLabel = updated.toLocaleDateString('en-GB', {
 	year: 'numeric',
 	month: 'long',
@@ -11,7 +11,7 @@ const updatedLabel = updated.toLocaleDateString('en-GB', {
 
 <BaseLayout
 	title="Privacy Policy — Luke Coleman"
-	description="Privacy policy for iOS apps published by Luke Coleman."
+	description="Privacy policy for iOS and Mac apps published by Luke Coleman."
 >
 	<article class="py-8 pb-16">
 		<div class="container-page">
@@ -21,7 +21,7 @@ const updatedLabel = updated.toLocaleDateString('en-GB', {
 					Privacy policy
 				</h1>
 				<p class="mb-3 text-muted">
-					This policy applies to iOS apps published by Luke Coleman.
+					This policy applies to iOS and Mac apps published by Luke Coleman.
 				</p>
 				<p class="text-[0.9rem] font-semibold text-ink">Last updated: {updatedLabel}</p>
 			</header>
@@ -36,7 +36,7 @@ const updatedLabel = updated.toLocaleDateString('en-GB', {
 				</p>
 				<p>
 					This page informs visitors about our policies regarding the collection, use, and disclosure
-					of personal information if anyone decides to use our iOS apps or related Software (“the
+					of personal information if anyone decides to use our iOS or Mac apps or related Software (“the
 					App” / “our Software”).
 				</p>
 				<p>
@@ -44,6 +44,38 @@ const updatedLabel = updated.toLocaleDateString('en-GB', {
 					relation to this policy. Personal information we collect is used for providing and
 					improving the Software. We will not use or share your information with anyone except as
 					described in this privacy policy.
+				</p>
+
+				<h2 id="blurloom">Blurloom (Mac)</h2>
+				<p>
+					<strong>Blurloom collects no personal data.</strong> In short:
+				</p>
+				<ul>
+					<li>
+						Blurloom has no accounts, analytics, advertising or crash-reporting SDKs, and makes no
+						network requests of its own.
+					</li>
+					<li>
+						Photos you open are processed only on your Mac. They are never uploaded or sent
+						anywhere.
+					</li>
+					<li>
+						Blurloom stores only your settings, your saved gradients and the wallpaper images it
+						creates, all on your Mac. Deleting the app removes them.
+					</li>
+					<li>
+						The Blurloom Pro purchase is handled entirely by Apple through the Mac App Store. We
+						never see your payment details.
+					</li>
+				</ul>
+				<p>
+					If you choose to share diagnostics with app developers in macOS, Apple may send us
+					anonymous crash reports. This is controlled by you in System Settings and governed by
+					Apple’s privacy policy.
+				</p>
+				<p>
+					The rest of this policy covers all of our apps. Sections about third-party services, log
+					data, accounts and cloud processing do not apply to Blurloom.
 				</p>
 
 				<h2>Information collection and use</h2>
@@ -141,7 +173,7 @@ const updatedLabel = updated.toLocaleDateString('en-GB', {
 					other purpose.
 				</p>
 				<p>
-					We rely on <strong>Apple</strong> (App Store / StoreKit) for iOS distribution and
+					We rely on <strong>Apple</strong> (App Store / StoreKit) for iOS and Mac distribution and
 					purchases. Apple processes related data under its own privacy policy. We do not sell your
 					personal information.
 				</p>
